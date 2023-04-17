@@ -1,0 +1,62 @@
+body{
+  width: 100vw;
+  height: 100vh;
+}
+
+.game{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.instructionPanel{
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 16px;
+  font-family: system-ui, sans-serif;
+}
+
+.board{
+  padding: 4px;
+  background-color: #ebebeb;
+  border: 4px solid #333;
+  border-radius: 3px;
+}
+
+.boardRow{
+  display: flex;
+}
+
+.square{
+  width: 64px;
+  height: 64px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 18px;
+
+  background-color: #fff;
+  border: 2px solid #999;
+  margin: 2px;
+  
+}
+
+.square:hover {
+  background-color: #a2bdbb;
+}
+
+.buttonReset{
+  margin-top: 20px;
+  padding: 9px 24px;
+  border-radius: 3px;
+  background-color: #db8f88;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.buttonReset:hover {
+  background-color: #c56a62;
+}
