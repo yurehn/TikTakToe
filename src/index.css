@@ -56,6 +56,14 @@ body {
   cursor: default;
 }
 
+.winner {
+  background-color: #b3497f;
+}
+
+.winner:hover {
+  background-color: #b3497f;
+}
+
 .buttonReset {
   margin-top: 20px;
   padding: 9px 24px;
