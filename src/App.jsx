@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./index.css"
 
+
 const initialGame = [null, null, null, null, null, null, null, null, null]
 const initialWinningBoxes = [
   [1, 2, 3],
@@ -80,6 +81,14 @@ function App() {
     )
   }
 
+  const reset = () => {
+    setGame(initialGame)
+    setBoxesWinners(initialWinningBoxes)
+    setActualPlayer('X')
+    setWinner(false)
+    setBoxWin([])
+  }
+
   return (
     <div className="game">
       <div className="instructionPanel">
@@ -102,15 +111,7 @@ function App() {
           <Square makeMark={makeMark} boardIndex={2} />
         </div>
       </div>
-      <button className="buttonReset"
-        onClick={() => {
-          setGame(initialGame)
-          setBoxesWinners(initialWinningBoxes)
-          setActualPlayer('X')
-          setWinner(false)
-          setBoxWin([])
-        }}
-      >
+      <button className="buttonReset" onClick={reset}>
         Reset
       </button>
     </div>
