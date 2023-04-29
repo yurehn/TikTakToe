@@ -1,91 +1,64 @@
 import { useState } from "react";
-import "./index.css"
+import { INITIALGAME, INITIALWINNINGBOXES, TURNS } from './constants.js'
+import Square from './component/Square.jsx'
 
-
-const initialGame = [null, null, null, null, null, null, null, null, null]
-const initialWinningBoxes = [
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
-  [1, 4, 7],
-  [2, 5, 8],
-  [3, 6, 9],
-  [1, 5, 9],
-  [3, 5, 7]
-]
 
 const verifyWinner = (game, boxesWinners) => {
 
-  let newBoxesWinners = [...boxesWinners]
+  let result = {
+    winner: false,
+    boxWinner: [],
+    newWinningBoxes: boxesWinners
+  }
 
   for (const arr of boxesWinners) {
-    const changedBox = arr.map((position) => game[position - 1])
+    const [a, b, c] = arr.map((position) => game[position - 1])
 
-    if (changedBox.includes(null)) {
-      continue
-    }
+    if ([a, b, c].includes(null)) continue
 
-    if (changedBox[0] === changedBox[1] && changedBox[0] === changedBox[2]) {
-      return {
-        winner: true,
-        boxWinner: arr
-      }
+    if (a === b && a === c) {
+      result.winner = true
+      result.boxWinner = arr
     } else {
-      newBoxesWinners = newBoxesWinners.filter(array => array !== arr)
+      result.newWinningBoxes = result.newWinningBoxes.filter(array => array !== arr)
     }
   }
 
-  return {
-    winner: false,
-    newBoxesWinners: newBoxesWinners
-  }
+  return result
 }
 
 
 function App() {
-  
-  const [boxesWinners, setBoxesWinners] = useState(initialWinningBoxes)
-  const [game, setGame] = useState(initialGame)
 
-  const [actualPlayer, setActualPlayer] = useState('X')
-  const [winner, setWinner] = useState(false)
+  const [boxesWinners, setBoxesWinners] = useState(INITIALWINNINGBOXES)
+  const [game, setGame] = useState(INITIALGAME)
+
+  const [actualPlayer, setActualPlayer] = useState(TURNS.X)
   const [boxWin, setBoxWin] = useState([])
-  
+
 
   const makeMark = (boardIndex) => {
+
     const newGame = [...game]
     newGame[boardIndex] = actualPlayer
     setGame(newGame)
 
-    let data = verifyWinner(newGame, boxesWinners)
+    let { winner, boxWinner, newWinningBoxes } = verifyWinner(newGame, boxesWinners)
 
-    if (data.winner) {
-      setActualPlayer('--')
-      setWinner(true)
-      setBoxWin(data.boxWinner)
-      
+    if (winner) {
+      setActualPlayer('---')
+      setBoxWin(boxWinner)
+
     } else {
-      setBoxesWinners(data.newBoxesWinners)
-      setActualPlayer(actualPlayer === "X" ? "O" : "X")
+      setBoxesWinners(newWinningBoxes)
+      setActualPlayer(actualPlayer === TURNS.X ? TURNS.O : TURNS.X)
     }
   }
 
-  const Square = ({ makeMark, boardIndex }) => {
-    return (
-      <div
-        className={` square ${game[boardIndex] ? 'checkedBox' : ''} ${boxWin.includes(boardIndex + 1) ? 'winner': ''}`}
-        onClick={() => !game[boardIndex] && !winner ? makeMark(boardIndex) : ''}
-      >
-        {game[boardIndex]}
-      </div>
-    )
-  }
-
   const reset = () => {
-    setGame(initialGame)
-    setBoxesWinners(initialWinningBoxes)
-    setActualPlayer('X')
-    setWinner(false)
+    setGame(INITIALGAME)
+    setBoxesWinners(INITIALWINNINGBOXES)
+    setActualPlayer(TURNS.X)
     setBoxWin([])
   }
 
@@ -95,21 +68,20 @@ function App() {
         Next player: <span>{actualPlayer}</span>
       </div>
       <div className="board">
-        <div className="boardRow">
-          <Square makeMark={makeMark} boardIndex={6} />
-          <Square makeMark={makeMark} boardIndex={7} />
-          <Square makeMark={makeMark} boardIndex={8} />
-        </div>
-        <div className="boardRow">
-          <Square makeMark={makeMark} boardIndex={3} />
-          <Square makeMark={makeMark} boardIndex={4} />
-          <Square makeMark={makeMark} boardIndex={5} />
-        </div>
-        <div className="boardRow">
-          <Square makeMark={makeMark} boardIndex={0} />
-          <Square makeMark={makeMark} boardIndex={1} />
-          <Square makeMark={makeMark} boardIndex={2} />
-        </div>
+        {
+          game.map((value, index) => {
+            return (
+              <Square
+                key={index}
+                makeMark={makeMark}
+                boardIndex={index}
+                boxWin={boxWin}
+              >
+                {value}
+              </Square>
+            )
+          })
+        }
       </div>
       <button className="buttonReset" onClick={reset}>
         Reset
