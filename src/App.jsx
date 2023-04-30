@@ -1,4 +1,5 @@
 import { useState } from "react";
+import confetti from 'canvas-confetti'
 import { INITIALGAME, INITIALWINNINGBOXES, TURNS } from './constants.js'
 import Square from './component/Square.jsx'
 
@@ -35,6 +36,7 @@ function App() {
 
   const [actualPlayer, setActualPlayer] = useState(TURNS.X)
   const [boxWin, setBoxWin] = useState([])
+  const [winner, setWinner] = useState(false)
 
 
   const makeMark = (boardIndex) => {
@@ -44,10 +46,12 @@ function App() {
     setGame(newGame)
 
     let { winner, boxWinner, newWinningBoxes } = verifyWinner(newGame, boxesWinners)
-
+    
     if (winner) {
-      setActualPlayer('---')
+      // setActualPlayer('---')
       setBoxWin(boxWinner)
+      setWinner(true)
+      confetti();
 
     } else {
       setBoxesWinners(newWinningBoxes)
@@ -60,13 +64,25 @@ function App() {
     setBoxesWinners(INITIALWINNINGBOXES)
     setActualPlayer(TURNS.X)
     setBoxWin([])
+    setWinner(false)
   }
 
   return (
     <div className="game">
-      <div className="instructionPanel">
-        Next player: <span>{actualPlayer}</span>
-      </div>
+      <div className="infoPanel">
+        {
+          winner ? (
+            <div className="panelWinner">
+              <div>{actualPlayer} <span> Win!</span></div>
+            </div>
+            
+          ) : (
+            <div className="instructionPanel">
+              Next player: <span>{actualPlayer}</span>
+            </div>  
+          )
+        }
+      </div >
       <div className="board">
         {
           game.map((value, index) => {
