@@ -11,11 +11,8 @@ TikTakToe está construido con las siguientes tecnologías:
 
 ## Capturas de Pantalla
 
-![image](https://user-images.githubusercontent.com/62664161/235382257-bd4b6ff2-96cc-4966-b638-d6a164994182.png)
-![image](https://user-images.githubusercontent.com/62664161/235382238-dc7289ba-1e6c-4c21-9db2-4e91cf965a3d.png)
-
-
-
-
+![image](https://user-images.githubusercontent.com/62664161/235383874-25c6e258-a83b-4843-9783-961037f71807.png)
+![image](https://user-images.githubusercontent.com/62664161/235383857-89ac7d56-cc3c-401b-8da5-8c38fe602dd0.png)
+![image](https://user-images.githubusercontent.com/62664161/235383907-34c55f22-513b-488e-833b-0f7a53b51be4.png)
 
 ## Demo
