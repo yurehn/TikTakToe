@@ -10,7 +10,12 @@ TikTakToe está construido con las siguientes tecnologías:
 
 
 ## Capturas de Pantalla
-El diseño es minimalista.
+
+![image](https://user-images.githubusercontent.com/62664161/235382257-bd4b6ff2-96cc-4966-b638-d6a164994182.png)
+![image](https://user-images.githubusercontent.com/62664161/235382238-dc7289ba-1e6c-4c21-9db2-4e91cf965a3d.png)
+
+
+
 
 
 ## Demo
