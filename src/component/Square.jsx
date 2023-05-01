@@ -1,5 +1,5 @@
 const Square = ({ children, makeMark, boardIndex, boxWin }) => {
-  const colorWinningBox = `${boxWin.includes(boardIndex + 1) ? 'winner' : ''}`
+  const colorWinningBox = `${boxWin.includes(boardIndex + 1) ? 'bg-square-winner' : ''}`
   const colorCheckedBox = `${children ? 'checkedBox' : ''}`
 
   const handleClick = () => {

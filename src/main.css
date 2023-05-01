@@ -13,10 +13,9 @@
   --button-Reset-bg: #db8f88;
   --button-Reset-bg-hover: #c56a62;
 
-  --color-1: #d8d8ae;
-  --color-2: #e4e4c0;
-  --color-3: #c5c5a3;
-  --gradient-background-winner: linear-gradient(to right, var(--color-1), var(--color-2), var(--color-3));
+
+  --gradient-background-winner: linear-gradient(to right, #d8d8ae, #e4e4c0, #c5c5a3);
+  --gradient-background-tie: linear-gradient(to right, #9698a7, #838a82, #857c7e);
 
   --panel-Winner-border: #333333b2;
   --panel-Winner-box-shadow: #68676780;
@@ -52,7 +51,7 @@ body {
   margin-left: 4px;
 }
 
-.panelWinner {
+.panel {
   font-size: 30px;
 
   border: 2px solid var(--panel-Winner-border);
@@ -63,8 +62,6 @@ body {
   padding: 10px 0px;
 
   width: 250px;
-
-  background: var(--gradient-background-winner);
 
   opacity: 0;
   animation: aparecer 0.5s forwards;
@@ -80,9 +77,17 @@ body {
   }
 }
 
+.panelWinner {
+  background: var(--gradient-background-winner);
+}
+
 .panelWinner span {
   margin-left: 8px;
   font-weight: bold;
+}
+
+.panelTie {
+  background: var(--gradient-background-tie);
 }
 
 .board {
@@ -124,11 +129,11 @@ body {
   cursor: default;
 }
 
-.winner {
+.bg-square-winner {
   background-color: var(--winner);
 }
 
-.winner:hover {
+.bg-square-winner:hover {
   background-color: var(--winner);
 }
 

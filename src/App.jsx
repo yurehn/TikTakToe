@@ -46,9 +46,8 @@ function App() {
     setGame(newGame)
 
     let { winner, boxWinner, newWinningBoxes } = verifyWinner(newGame, boxesWinners)
-    
+
     if (winner) {
-      // setActualPlayer('---')
       setBoxWin(boxWinner)
       setWinner(true)
       confetti();
@@ -71,18 +70,23 @@ function App() {
     <div className="game">
       <div className="infoPanel">
         {
-          winner ? (
-            <div className="panelWinner">
-              <div>{actualPlayer} <span> Win!</span></div>
+          boxesWinners.length === 0 ? (
+            <div className="panel panelTie">
+              <span> Tie!</span>
             </div>
-            
           ) : (
-            <div className="instructionPanel">
-              Next player: <span>{actualPlayer}</span>
-            </div>  
+            winner ? (
+              <div className="panel panelWinner">
+                <div>{actualPlayer} <span> Win!</span></div>
+              </div>
+            ) : (
+              <div className="instructionPanel">
+                Next player: <span>{actualPlayer}</span>
+              </div>
+            )
           )
         }
-      </div >
+      </div>
       <div className="board">
         {
           game.map((value, index) => {
